@@ -72,11 +72,11 @@ let rec removeZero l = match l with
 let bigAdd l1 l2 = 
   let add (l1, l2) = 
           let f a x = let (x1,x2) = x in
-          let (carry, acc) = a in 
-          let sumv = x1 + x2 + carry in
-          if sumv > 9 then (1, (sumv mod 10)::acc) 
-          else (0, sumv::acc) in
-    let base = (0, []) in
+          let (_, h::t) = a in 
+          let sumv = x1 + x2 + h in
+          if sumv > 9 then (1, 1::(sumv mod 10)::t) 
+          else (0, 0::sumv::t) in
+    let base = (0, [0]) in
     let args = List.rev (List.combine l1 l2) in
     let (_, res) = List.fold_left f base args in
       res
