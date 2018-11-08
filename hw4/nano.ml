@@ -110,8 +110,35 @@ let listAssoc (k,l) =
 
 (*********************** Your code starts here ****************************)
 
-let lookup (x,evn) = failwith "to be written"
+let lookup (x,evn) = let tval = listAssoc (x, evn) in
+match tval with
+| None -> raise (MLFailure ("unbound value: x"))
+| Some a -> a
+;;
 
-let rec eval (evn,e) = failwith "to be written"
+let findOp x = match x with
+| Plus -> (+)
+| Minus -> (-)
+| Mul -> ( * )
+| Div -> (/)
+| _ -> raise (MLFailure ("unknown operation"))
+;;
+
+let findValue x = match x with
+| Int a -> a
+;;
+
+let typeCheck (x,y) = match (x,y) with
+| (Int _, Int _) -> true
+| _ -> false
+
+let rec eval (evn,e) = 
+let rec helper x = match x with
+| Const x1 -> x1
+| Var x1 -> findValue (lookup (x1, evn))
+| Bin (num1,optr,num2) -> (findOp optr) (helper num1) (helper num2)
+| _ -> raise (MLFailure ("unknow")) 
+in Int (helper e)
+;;
 
 (**********************     Testing Code  ******************************)

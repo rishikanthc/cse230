@@ -369,14 +369,14 @@ ident(
 )
 "main.ml" 19 416 440 "main.ml" 19 416 449
 type(
-  '_weak1 list * Nano.expr -> Nano.value
+  (string * Nano.value) list * Nano.expr -> Nano.value
 )
 ident(
-  int_ref Nano.eval "nano.ml" 115 2714 2722 "nano.ml" 115 2714 2726
+  int_ref Nano.eval "nano.ml" 135 3066 3074 "nano.ml" 135 3066 3078
 )
 "main.ml" 19 416 451 "main.ml" 19 416 453
 type(
-  '_weak1 list
+  (string * Nano.value) list
 )
 "main.ml" 19 416 455 "main.ml" 19 416 471
 type(
@@ -401,7 +401,7 @@ type(
 )
 "main.ml" 19 416 450 "main.ml" 19 416 475
 type(
-  '_weak1 list * Nano.expr
+  (string * Nano.value) list * Nano.expr
 )
 "main.ml" 19 416 439 "main.ml" 19 416 476
 call(
@@ -490,14 +490,14 @@ ident(
 )
 "main.ml" 24 558 579 "main.ml" 24 558 588
 type(
-  '_weak2 list * Nano.expr -> Nano.value
+  (string * Nano.value) list * Nano.expr -> Nano.value
 )
 ident(
-  int_ref Nano.eval "nano.ml" 115 2714 2722 "nano.ml" 115 2714 2726
+  int_ref Nano.eval "nano.ml" 135 3066 3074 "nano.ml" 135 3066 3078
 )
 "main.ml" 24 558 590 "main.ml" 24 558 592
 type(
-  '_weak2 list
+  (string * Nano.value) list
 )
 "main.ml" 24 558 594 "main.ml" 24 558 608
 type(
@@ -522,7 +522,7 @@ type(
 )
 "main.ml" 24 558 589 "main.ml" 24 558 612
 type(
-  '_weak2 list * Nano.expr
+  (string * Nano.value) list * Nano.expr
 )
 "main.ml" 24 558 578 "main.ml" 24 558 613
 call(

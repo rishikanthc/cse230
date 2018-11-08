@@ -1603,87 +1603,604 @@ type(
 )
 "nano.ml" 113 2667 2671 "nano.ml" 113 2667 2677
 type(
-  'a * 'b -> 'c
+  'a * ('a * 'b) list -> 'b
 )
 ident(
-  def lookup "nano.ml" 115 2714 2714 "nano.ml" 1 0 -1
+  def lookup "nano.ml" 119 2804 2804 "nano.ml" 1 0 -1
 )
 "nano.ml" 113 2667 2679 "nano.ml" 113 2667 2680
 type(
   'a
 )
 ident(
-  def x "nano.ml" 113 2667 2688 "nano.ml" 113 2667 2712
+  def x "nano.ml" 113 2667 2688 "nano.ml" 116 2786 2799
 )
 "nano.ml" 113 2667 2681 "nano.ml" 113 2667 2684
 type(
-  'b
+  ('a * 'b) list
 )
 ident(
-  def evn "nano.ml" 113 2667 2688 "nano.ml" 113 2667 2712
+  def evn "nano.ml" 113 2667 2688 "nano.ml" 116 2786 2799
 )
 "nano.ml" 113 2667 2678 "nano.ml" 113 2667 2685
 type(
-  'a * 'b
+  'a * ('a * 'b) list
 )
-"nano.ml" 113 2667 2688 "nano.ml" 113 2667 2696
+"nano.ml" 113 2667 2692 "nano.ml" 113 2667 2696
 type(
-  string -> 'c
+  'b option
 )
 ident(
-  int_ref Stdlib.failwith "stdlib.mli" 47 1981 1981 "stdlib.mli" 47 1981 2008
+  def tval "nano.ml" 114 2721 2721 "nano.ml" 116 2786 2799
 )
-"nano.ml" 113 2667 2697 "nano.ml" 113 2667 2712
+"nano.ml" 113 2667 2699 "nano.ml" 113 2667 2708
 type(
-  string
-)
-"nano.ml" 113 2667 2688 "nano.ml" 113 2667 2712
-call(
-  tail
-)
-type(
-  'c
-)
-"nano.ml" 115 2714 2722 "nano.ml" 115 2714 2726
-type(
-  'a * 'b -> 'c
+  'a * ('a * 'b) list -> 'b option
 )
 ident(
-  def eval "nano.ml" 115 2714 2714 "nano.ml" 1 0 -1
+  int_ref listAssoc "nano.ml" 108 2494 2498 "nano.ml" 108 2494 2507
 )
-"nano.ml" 115 2714 2728 "nano.ml" 115 2714 2731
+"nano.ml" 113 2667 2710 "nano.ml" 113 2667 2711
 type(
   'a
 )
 ident(
-  def evn "nano.ml" 115 2714 2737 "nano.ml" 115 2714 2761
+  int_ref x "nano.ml" 113 2667 2679 "nano.ml" 113 2667 2680
 )
-"nano.ml" 115 2714 2732 "nano.ml" 115 2714 2733
+"nano.ml" 113 2667 2713 "nano.ml" 113 2667 2716
+type(
+  ('a * 'b) list
+)
+ident(
+  int_ref evn "nano.ml" 113 2667 2681 "nano.ml" 113 2667 2684
+)
+"nano.ml" 113 2667 2709 "nano.ml" 113 2667 2717
+type(
+  'a * ('a * 'b) list
+)
+"nano.ml" 113 2667 2699 "nano.ml" 113 2667 2717
+call(
+  stack
+)
+type(
+  'b option
+)
+"nano.ml" 114 2721 2727 "nano.ml" 114 2721 2731
+type(
+  'b option
+)
+ident(
+  int_ref tval "nano.ml" 113 2667 2692 "nano.ml" 113 2667 2696
+)
+"nano.ml" 115 2737 2739 "nano.ml" 115 2737 2743
+type(
+  'b option
+)
+"nano.ml" 115 2737 2747 "nano.ml" 115 2737 2752
+type(
+  exn -> 'b
+)
+ident(
+  int_ref Stdlib.raise "stdlib.mli" 36 1664 1664 "stdlib.mli" 36 1664 1701
+)
+"nano.ml" 115 2737 2764 "nano.ml" 115 2737 2784
+type(
+  string
+)
+"nano.ml" 115 2737 2753 "nano.ml" 115 2737 2785
+type(
+  exn
+)
+"nano.ml" 115 2737 2747 "nano.ml" 115 2737 2785
+type(
+  'b
+)
+"nano.ml" 116 2786 2793 "nano.ml" 116 2786 2794
 type(
   'b
 )
 ident(
-  def e "nano.ml" 115 2714 2737 "nano.ml" 115 2714 2761
+  def a "nano.ml" 116 2786 2798 "nano.ml" 116 2786 2799
 )
-"nano.ml" 115 2714 2727 "nano.ml" 115 2714 2734
+"nano.ml" 116 2786 2788 "nano.ml" 116 2786 2794
 type(
-  'a * 'b
+  'b option
 )
-"nano.ml" 115 2714 2737 "nano.ml" 115 2714 2745
+"nano.ml" 116 2786 2798 "nano.ml" 116 2786 2799
 type(
-  string -> 'c
+  'b
 )
 ident(
-  int_ref Stdlib.failwith "stdlib.mli" 47 1981 1981 "stdlib.mli" 47 1981 2008
+  int_ref a "nano.ml" 116 2786 2793 "nano.ml" 116 2786 2794
 )
-"nano.ml" 115 2714 2746 "nano.ml" 115 2714 2761
+"nano.ml" 114 2721 2721 "nano.ml" 116 2786 2799
+type(
+  'b
+)
+"nano.ml" 113 2667 2688 "nano.ml" 116 2786 2799
+type(
+  'b
+)
+"nano.ml" 119 2804 2808 "nano.ml" 119 2804 2814
+type(
+  binop -> int -> int -> int
+)
+ident(
+  def findOp "nano.ml" 127 2940 2940 "nano.ml" 1 0 -1
+)
+"nano.ml" 119 2804 2815 "nano.ml" 119 2804 2816
+type(
+  binop
+)
+ident(
+  def x "nano.ml" 119 2804 2819 "nano.ml" 124 2889 2935
+)
+"nano.ml" 119 2804 2825 "nano.ml" 119 2804 2826
+type(
+  binop
+)
+ident(
+  int_ref x "nano.ml" 119 2804 2815 "nano.ml" 119 2804 2816
+)
+"nano.ml" 120 2832 2834 "nano.ml" 120 2832 2838
+type(
+  binop
+)
+"nano.ml" 120 2832 2842 "nano.ml" 120 2832 2845
+type(
+  int -> int -> int
+)
+ident(
+  int_ref Stdlib.( + ) "stdlib.mli" 267 10384 10384 "stdlib.mli" 267 10384 10430
+)
+"nano.ml" 121 2846 2848 "nano.ml" 121 2846 2853
+type(
+  binop
+)
+"nano.ml" 121 2846 2857 "nano.ml" 121 2846 2860
+type(
+  int -> int -> int
+)
+ident(
+  int_ref Stdlib.( - ) "stdlib.mli" 271 10513 10513 "stdlib.mli" 271 10513 10559
+)
+"nano.ml" 122 2861 2863 "nano.ml" 122 2861 2866
+type(
+  binop
+)
+"nano.ml" 122 2861 2870 "nano.ml" 122 2861 2875
+type(
+  int -> int -> int
+)
+ident(
+  int_ref Stdlib.( * ) "stdlib.mli" 275 10645 10645 "stdlib.mli" 275 10645 10691
+)
+"nano.ml" 123 2876 2878 "nano.ml" 123 2876 2881
+type(
+  binop
+)
+"nano.ml" 123 2876 2885 "nano.ml" 123 2876 2888
+type(
+  int -> int -> int
+)
+ident(
+  int_ref Stdlib.( / ) "stdlib.mli" 279 10780 10780 "stdlib.mli" 279 10780 10826
+)
+"nano.ml" 124 2889 2891 "nano.ml" 124 2889 2892
+type(
+  binop
+)
+"nano.ml" 124 2889 2896 "nano.ml" 124 2889 2901
+type(
+  exn -> int -> int -> int
+)
+ident(
+  int_ref Stdlib.raise "stdlib.mli" 36 1664 1664 "stdlib.mli" 36 1664 1701
+)
+"nano.ml" 124 2889 2913 "nano.ml" 124 2889 2934
 type(
   string
 )
-"nano.ml" 115 2714 2737 "nano.ml" 115 2714 2761
+"nano.ml" 124 2889 2902 "nano.ml" 124 2889 2935
+type(
+  exn
+)
+"nano.ml" 124 2889 2896 "nano.ml" 124 2889 2935
+type(
+  int -> int -> int
+)
+"nano.ml" 119 2804 2819 "nano.ml" 124 2889 2935
+type(
+  int -> int -> int
+)
+"nano.ml" 127 2940 2944 "nano.ml" 127 2940 2953
+type(
+  value -> int
+)
+ident(
+  def findValue "nano.ml" 131 2988 2988 "nano.ml" 1 0 -1
+)
+"nano.ml" 127 2940 2954 "nano.ml" 127 2940 2955
+type(
+  value
+)
+ident(
+  def x "nano.ml" 127 2940 2958 "nano.ml" 128 2971 2983
+)
+"nano.ml" 127 2940 2964 "nano.ml" 127 2940 2965
+type(
+  value
+)
+ident(
+  int_ref x "nano.ml" 127 2940 2954 "nano.ml" 127 2940 2955
+)
+"nano.ml" 128 2971 2977 "nano.ml" 128 2971 2978
+type(
+  int
+)
+ident(
+  def a "nano.ml" 128 2971 2982 "nano.ml" 128 2971 2983
+)
+"nano.ml" 128 2971 2973 "nano.ml" 128 2971 2978
+type(
+  value
+)
+"nano.ml" 128 2971 2982 "nano.ml" 128 2971 2983
+type(
+  int
+)
+ident(
+  int_ref a "nano.ml" 128 2971 2977 "nano.ml" 128 2971 2978
+)
+"nano.ml" 127 2940 2958 "nano.ml" 128 2971 2983
+type(
+  int
+)
+"nano.ml" 131 2988 2992 "nano.ml" 131 2988 3001
+type(
+  value * value -> bool
+)
+ident(
+  def typeCheck "nano.ml" 135 3066 3066 "nano.ml" 1 0 -1
+)
+"nano.ml" 131 2988 3003 "nano.ml" 131 2988 3004
+type(
+  value
+)
+ident(
+  def x "nano.ml" 131 2988 3010 "nano.ml" 133 3052 3064
+)
+"nano.ml" 131 2988 3005 "nano.ml" 131 2988 3006
+type(
+  value
+)
+ident(
+  def y "nano.ml" 131 2988 3010 "nano.ml" 133 3052 3064
+)
+"nano.ml" 131 2988 3002 "nano.ml" 131 2988 3007
+type(
+  value * value
+)
+"nano.ml" 131 2988 3017 "nano.ml" 131 2988 3018
+type(
+  value
+)
+ident(
+  int_ref x "nano.ml" 131 2988 3003 "nano.ml" 131 2988 3004
+)
+"nano.ml" 131 2988 3019 "nano.ml" 131 2988 3020
+type(
+  value
+)
+ident(
+  int_ref y "nano.ml" 131 2988 3005 "nano.ml" 131 2988 3006
+)
+"nano.ml" 131 2988 3016 "nano.ml" 131 2988 3021
+type(
+  value * value
+)
+"nano.ml" 132 3027 3034 "nano.ml" 132 3027 3035
+type(
+  int
+)
+"nano.ml" 132 3027 3030 "nano.ml" 132 3027 3035
+type(
+  value
+)
+"nano.ml" 132 3027 3041 "nano.ml" 132 3027 3042
+type(
+  int
+)
+"nano.ml" 132 3027 3037 "nano.ml" 132 3027 3042
+type(
+  value
+)
+"nano.ml" 132 3027 3029 "nano.ml" 132 3027 3043
+type(
+  value * value
+)
+"nano.ml" 132 3027 3047 "nano.ml" 132 3027 3051
+type(
+  bool
+)
+"nano.ml" 133 3052 3054 "nano.ml" 133 3052 3055
+type(
+  value * value
+)
+"nano.ml" 133 3052 3059 "nano.ml" 133 3052 3064
+type(
+  bool
+)
+"nano.ml" 131 2988 3010 "nano.ml" 133 3052 3064
+type(
+  bool
+)
+"nano.ml" 135 3066 3074 "nano.ml" 135 3066 3078
+type(
+  (string * value) list * expr -> value
+)
+ident(
+  def eval "nano.ml" 135 3066 3066 "nano.ml" 1 0 -1
+)
+"nano.ml" 135 3066 3080 "nano.ml" 135 3066 3083
+type(
+  (string * value) list
+)
+ident(
+  def evn "nano.ml" 136 3090 3090 "nano.ml" 141 3285 3302
+)
+"nano.ml" 135 3066 3084 "nano.ml" 135 3066 3085
+type(
+  expr
+)
+ident(
+  def e "nano.ml" 136 3090 3090 "nano.ml" 141 3285 3302
+)
+"nano.ml" 135 3066 3079 "nano.ml" 135 3066 3086
+type(
+  (string * value) list * expr
+)
+"nano.ml" 136 3090 3098 "nano.ml" 136 3090 3104
+type(
+  expr -> int
+)
+ident(
+  def helper "nano.ml" 136 3090 3090 "nano.ml" 141 3285 3302
+)
+"nano.ml" 136 3090 3105 "nano.ml" 136 3090 3106
+type(
+  expr
+)
+ident(
+  def x "nano.ml" 136 3090 3109 "nano.ml" 140 3248 3283
+)
+"nano.ml" 136 3090 3115 "nano.ml" 136 3090 3116
+type(
+  expr
+)
+ident(
+  int_ref x "nano.ml" 136 3090 3105 "nano.ml" 136 3090 3106
+)
+"nano.ml" 137 3122 3130 "nano.ml" 137 3122 3132
+type(
+  int
+)
+ident(
+  def x1 "nano.ml" 137 3122 3136 "nano.ml" 137 3122 3138
+)
+"nano.ml" 137 3122 3124 "nano.ml" 137 3122 3132
+type(
+  expr
+)
+"nano.ml" 137 3122 3136 "nano.ml" 137 3122 3138
+type(
+  int
+)
+ident(
+  int_ref x1 "nano.ml" 137 3122 3130 "nano.ml" 137 3122 3132
+)
+"nano.ml" 138 3139 3145 "nano.ml" 138 3139 3147
+type(
+  string
+)
+ident(
+  def x1 "nano.ml" 138 3139 3151 "nano.ml" 138 3139 3179
+)
+"nano.ml" 138 3139 3141 "nano.ml" 138 3139 3147
+type(
+  expr
+)
+"nano.ml" 138 3139 3151 "nano.ml" 138 3139 3160
+type(
+  value -> int
+)
+ident(
+  int_ref findValue "nano.ml" 127 2940 2944 "nano.ml" 127 2940 2953
+)
+"nano.ml" 138 3139 3162 "nano.ml" 138 3139 3168
+type(
+  string * (string * value) list -> value
+)
+ident(
+  int_ref lookup "nano.ml" 113 2667 2671 "nano.ml" 113 2667 2677
+)
+"nano.ml" 138 3139 3170 "nano.ml" 138 3139 3172
+type(
+  string
+)
+ident(
+  int_ref x1 "nano.ml" 138 3139 3145 "nano.ml" 138 3139 3147
+)
+"nano.ml" 138 3139 3174 "nano.ml" 138 3139 3177
+type(
+  (string * value) list
+)
+ident(
+  int_ref evn "nano.ml" 135 3066 3080 "nano.ml" 135 3066 3083
+)
+"nano.ml" 138 3139 3169 "nano.ml" 138 3139 3178
+type(
+  string * (string * value) list
+)
+"nano.ml" 138 3139 3161 "nano.ml" 138 3139 3179
+call(
+  stack
+)
+type(
+  value
+)
+"nano.ml" 138 3139 3151 "nano.ml" 138 3139 3179
 call(
   tail
 )
 type(
-  'c
+  int
+)
+"nano.ml" 139 3180 3187 "nano.ml" 139 3180 3191
+type(
+  expr
+)
+ident(
+  def num1 "nano.ml" 139 3180 3206 "nano.ml" 139 3180 3247
+)
+"nano.ml" 139 3180 3192 "nano.ml" 139 3180 3196
+type(
+  binop
+)
+ident(
+  def optr "nano.ml" 139 3180 3206 "nano.ml" 139 3180 3247
+)
+"nano.ml" 139 3180 3197 "nano.ml" 139 3180 3201
+type(
+  expr
+)
+ident(
+  def num2 "nano.ml" 139 3180 3206 "nano.ml" 139 3180 3247
+)
+"nano.ml" 139 3180 3182 "nano.ml" 139 3180 3202
+type(
+  expr
+)
+"nano.ml" 139 3180 3207 "nano.ml" 139 3180 3213
+type(
+  binop -> int -> int -> int
+)
+ident(
+  int_ref findOp "nano.ml" 119 2804 2808 "nano.ml" 119 2804 2814
+)
+"nano.ml" 139 3180 3214 "nano.ml" 139 3180 3218
+type(
+  binop
+)
+ident(
+  int_ref optr "nano.ml" 139 3180 3192 "nano.ml" 139 3180 3196
+)
+"nano.ml" 139 3180 3206 "nano.ml" 139 3180 3219
+type(
+  int -> int -> int
+)
+"nano.ml" 139 3180 3221 "nano.ml" 139 3180 3227
+type(
+  expr -> int
+)
+ident(
+  int_ref helper "nano.ml" 136 3090 3098 "nano.ml" 136 3090 3104
+)
+"nano.ml" 139 3180 3228 "nano.ml" 139 3180 3232
+type(
+  expr
+)
+ident(
+  int_ref num1 "nano.ml" 139 3180 3187 "nano.ml" 139 3180 3191
+)
+"nano.ml" 139 3180 3220 "nano.ml" 139 3180 3233
+call(
+  stack
+)
+type(
+  int
+)
+"nano.ml" 139 3180 3235 "nano.ml" 139 3180 3241
+type(
+  expr -> int
+)
+ident(
+  int_ref helper "nano.ml" 136 3090 3098 "nano.ml" 136 3090 3104
+)
+"nano.ml" 139 3180 3242 "nano.ml" 139 3180 3246
+type(
+  expr
+)
+ident(
+  int_ref num2 "nano.ml" 139 3180 3197 "nano.ml" 139 3180 3201
+)
+"nano.ml" 139 3180 3234 "nano.ml" 139 3180 3247
+call(
+  stack
+)
+type(
+  int
+)
+"nano.ml" 139 3180 3206 "nano.ml" 139 3180 3247
+call(
+  tail
+)
+type(
+  int
+)
+"nano.ml" 140 3248 3250 "nano.ml" 140 3248 3251
+type(
+  expr
+)
+"nano.ml" 140 3248 3255 "nano.ml" 140 3248 3260
+type(
+  exn -> int
+)
+ident(
+  int_ref Stdlib.raise "stdlib.mli" 36 1664 1664 "stdlib.mli" 36 1664 1701
+)
+"nano.ml" 140 3248 3272 "nano.ml" 140 3248 3282
+type(
+  string
+)
+"nano.ml" 140 3248 3261 "nano.ml" 140 3248 3283
+type(
+  exn
+)
+"nano.ml" 140 3248 3255 "nano.ml" 140 3248 3283
+type(
+  int
+)
+"nano.ml" 136 3090 3109 "nano.ml" 140 3248 3283
+type(
+  int
+)
+"nano.ml" 141 3285 3293 "nano.ml" 141 3285 3299
+type(
+  expr -> int
+)
+ident(
+  int_ref helper "nano.ml" 136 3090 3098 "nano.ml" 136 3090 3104
+)
+"nano.ml" 141 3285 3300 "nano.ml" 141 3285 3301
+type(
+  expr
+)
+ident(
+  int_ref e "nano.ml" 135 3066 3084 "nano.ml" 135 3066 3085
+)
+"nano.ml" 141 3285 3292 "nano.ml" 141 3285 3302
+call(
+  stack
+)
+type(
+  int
+)
+"nano.ml" 141 3285 3288 "nano.ml" 141 3285 3302
+type(
+  value
+)
+"nano.ml" 136 3090 3090 "nano.ml" 141 3285 3302
+type(
+  value
 )
