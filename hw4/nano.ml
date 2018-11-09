@@ -119,27 +119,49 @@ match tval with
 
 let convert x = match x with
 | Int a -> a
+| Bool a -> if a then 1 else 0
 ;;
 
-let typeCheck (x,y) = match (x,y) with
-| (Int _, Int _) -> true
+let typeCheck (op, x,y) = match (op, x,y) with
+| (Plus, Int _, Int _) -> true
+| (Minus, Int _, Int _) -> true
+| (Mul, Int _, Int _) -> true
+| (Div, Int _, Int _) -> true
+| (Lt, Int _, Int _) -> true
+| (Le, Int _, Int _) -> true
+| (Eq, Int _, Int _) -> true
+| (Eq, Bool _, Bool _) -> true
+| (Ne, Bool _, Bool _) -> true
+| (Ne, Int _, Int _) -> true
+| (And, Bool _, Bool _) -> true
+| (Or, Bool _, Bool _) -> true
 | _ -> false
 
 let doOp (num1, op, num2) = match op with
-        | Plus -> (+) (convert num1) (convert num2)
-        | Minus -> (-) (convert num1) (convert num2)
-        | Mul -> ( * ) (convert num1) (convert num2)
-        | Div -> (/) (convert num1) (convert num2)
+        | Plus -> Int ((+) (convert num1) (convert num2))
+        | Minus -> Int ((-) (convert num1) (convert num2))
+        | Mul -> Int (( * ) (convert num1) (convert num2))
+        | Div -> Int ((/) (convert num1) (convert num2))
+        | Lt -> Bool ((convert num1) < (convert num2))
+        | Le -> Bool ((convert num1) <= (convert num2))
+        | Eq -> Bool ((convert num1) = (convert num2))
+        | Ne -> Bool ((convert num1) != (convert num2))
+        | And -> Bool (((convert num1) * (convert num2)) = 1)
+        | Or -> Bool (((convert num1) + (convert num2)) = 1)
         | _ -> raise (MLFailure ("unknown operation"))
 ;;
 
 let rec eval (evn,e) = match e with
        | Const x1 -> Int x1
        | Var x1 -> lookup (x1, evn)
+       | True -> Bool true
+       | False -> Bool false
+       | If (p, t, f) -> if eval (evn, p) = Bool true then eval (evn, t)
+                         else eval (evn, f)
        | Bin (e1, op, e2) -> 
                        let n1 = eval (evn, e1) in
                        let n2 = eval (evn,e2) in
-                       if typeCheck (n1, n2) then Int (doOp (n1, op, n2))
+                       if typeCheck (op, n1, n2) then (doOp (n1, op, n2))
                        else raise (MLFailure ("type error"))
        | _ -> raise (MLFailure ("Unknown expression"))
 ;;
