@@ -110,10 +110,13 @@ let listAssoc (k,l) =
 
 (*********************** Your code starts here ****************************)
 
-let lookup (x,evn) = let tval = listAssoc (x, evn) in
-match tval with
-| None -> raise (MLFailure ("unbound value: x"))
-| Some a -> a
+let lookup (x,evn) = 
+        match x with
+        | "map" -> Closure ([], None, "f", Fun ("list", Letrec ("loop", Fun ("array", If (App (Var "null", Var "array"), NilExpr, Bin (App (Var "f", App (Var "hd", Var "array")), Cons, App (Var "loop", App (Var "tl", Var "array"))))), App (Var "loop", Var "list"))))
+        | _ -> let tval = listAssoc (x, evn) in
+                match tval with
+                | None -> raise (MLFailure ("unbound value: " ^ x))
+                | Some a -> a
 ;;
 
 
@@ -135,7 +138,7 @@ let typeCheck (op, x,y) = match (op, x,y) with
 | (Ne, Int _, Int _) -> true
 | (And, Bool _, Bool _) -> true
 | (Or, Bool _, Bool _) -> true
-| (Cons, _, _) -> true
+| (Cons, _, _) -> true (**)
 | _ -> false
 
 let doOp (num1, op, num2) = match op with
@@ -151,7 +154,7 @@ let doOp (num1, op, num2) = match op with
         | Or -> Bool (((convert num1) + (convert num2)) = 1)
         | Cons -> match (num1, num2) with
                         | (_, Nil) -> Pair (num1, Nil)
-                        | (_, _) -> Pair (num1, num2)
+                        | (_, Pair (a,b)) -> Pair (num1, num2)
         | _ -> raise (MLFailure ("unknown operation"))
 ;;
 
