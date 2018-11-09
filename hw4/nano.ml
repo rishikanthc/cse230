@@ -157,14 +157,21 @@ let rec eval (evn,e) = match e with
        | True -> Bool true
        | False -> Bool false
        | Let (b, e1, e2) -> eval ((b, eval(evn,e1))::evn ,e2)
-       | Letrec (b, e1, e2) -> eval ((b, eval(evn,e1))::evn ,e2)
+       | Letrec (b, e1, e2) -> 
+                       let rename x = match x with
+                       | Closure (fenv, name, param, body) -> Closure (fenv, Some b, param, body)
+                       | _ -> x
+                       in
+                       eval ((b, rename (eval (evn,e1)))::evn ,e2)
        | Fun (param, body) -> Closure (evn, None, param, body)
        | App (e1, e2) -> 
                        let func = eval (evn, e1) in
                        (match func with
                        | Closure _ -> 
                                let Closure (fenv, name, arg, body) = func in
-                               eval ((arg, eval (evn, e2))::fenv, body)
+                               (match name with
+                               | None -> eval ((arg, eval (evn, e2))::fenv, body)
+                               | Some f -> eval ((f, func)::(arg, eval (evn, e2))::fenv, body))
                        | _ -> raise (MLFailure ("E1 should evaluate to a function")))
        | If (p, t, f) -> if eval (evn, p) = Bool true then eval (evn, t)
                          else eval (evn, f)
