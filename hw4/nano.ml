@@ -116,15 +116,8 @@ match tval with
 | Some a -> a
 ;;
 
-let findOp x = match x with
-| Plus -> (+)
-| Minus -> (-)
-| Mul -> ( * )
-| Div -> (/)
-| _ -> raise (MLFailure ("unknown operation"))
-;;
 
-let findValue x = match x with
+let convert x = match x with
 | Int a -> a
 ;;
 
@@ -132,13 +125,23 @@ let typeCheck (x,y) = match (x,y) with
 | (Int _, Int _) -> true
 | _ -> false
 
-let rec eval (evn,e) = 
-let rec helper x = match x with
-| Const x1 -> x1
-| Var x1 -> findValue (lookup (x1, evn))
-| Bin (num1,optr,num2) -> (findOp optr) (helper num1) (helper num2)
-| _ -> raise (MLFailure ("unknow")) 
-in Int (helper e)
+let doOp (num1, op, num2) = match op with
+        | Plus -> (+) (convert num1) (convert num2)
+        | Minus -> (-) (convert num1) (convert num2)
+        | Mul -> ( * ) (convert num1) (convert num2)
+        | Div -> (/) (convert num1) (convert num2)
+        | _ -> raise (MLFailure ("unknown operation"))
+;;
+
+let rec eval (evn,e) = match e with
+       | Const x1 -> Int x1
+       | Var x1 -> lookup (x1, evn)
+       | Bin (e1, op, e2) -> 
+                       let n1 = eval (evn, e1) in
+                       let n2 = eval (evn,e2) in
+                       if typeCheck (n1, n2) then Int (doOp (n1, op, n2))
+                       else raise (MLFailure ("type error"))
+       | _ -> raise (MLFailure ("Unknown expression"))
 ;;
 
 (**********************     Testing Code  ******************************)
