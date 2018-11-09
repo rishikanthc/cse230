@@ -156,6 +156,8 @@ let rec eval (evn,e) = match e with
        | Var x1 -> lookup (x1, evn)
        | True -> Bool true
        | False -> Bool false
+       | Let (b, e1, e2) -> eval ((b, eval(evn,e1))::evn ,e2)
+       | Letrec (b, e1, e2) -> eval ((b, eval(evn,e1))::evn ,e2)
        | If (p, t, f) -> if eval (evn, p) = Bool true then eval (evn, t)
                          else eval (evn, f)
        | Bin (e1, op, e2) -> 
