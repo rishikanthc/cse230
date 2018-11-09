@@ -177,8 +177,19 @@ let rec eval (evn,e) = match e with
        | App (e1, e2) -> 
                        let func = eval (evn, e1) in
                        (match func with
-                       | NativeFunc "hd" -> let Pair (first, rest) = eval (evn, e2) in first
-                       | NativeFunc "tl" -> let Pair (first, rest) = eval (evn, e2) in rest 
+                       | NativeFunc "hd" ->
+                                       let list_eval = eval (evn, e2) in
+                                       (match list_eval with
+                                       | Pair (first, rest) -> first
+                                       | Nil -> raise (MLFailure ("list is empty"))
+                                       | _ -> raise (MLFailure ("type error: List elements should be a pair")))
+                       | NativeFunc "tl" -> 
+                                       let list_eval = eval (evn, e2) in
+                                       (match list_eval with
+                                       | Pair (first, rest) -> rest 
+                                       | Nil -> raise (MLFailure ("list is empty"))
+                                       | _ -> raise (MLFailure ("type error: List elements should be a pair")))
+                       | NativeFunc "null" -> Bool (eval (evn, e2) = Nil)
                        | Closure _ -> 
                                let Closure (fenv, name, arg, body) = func in
                                (match name with
