@@ -177,6 +177,8 @@ let rec eval (evn,e) = match e with
        | App (e1, e2) -> 
                        let func = eval (evn, e1) in
                        (match func with
+                       | NativeFunc "hd" -> let Pair (first, rest) = eval (evn, e2) in first
+                       | NativeFunc "tl" -> let Pair (first, rest) = eval (evn, e2) in rest 
                        | Closure _ -> 
                                let Closure (fenv, name, arg, body) = func in
                                (match name with
