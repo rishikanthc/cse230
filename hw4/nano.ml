@@ -135,6 +135,7 @@ let typeCheck (op, x,y) = match (op, x,y) with
 | (Ne, Int _, Int _) -> true
 | (And, Bool _, Bool _) -> true
 | (Or, Bool _, Bool _) -> true
+| (Cons, _, _) -> true
 | _ -> false
 
 let doOp (num1, op, num2) = match op with
@@ -148,14 +149,23 @@ let doOp (num1, op, num2) = match op with
         | Ne -> Bool ((convert num1) != (convert num2))
         | And -> Bool (((convert num1) * (convert num2)) = 1)
         | Or -> Bool (((convert num1) + (convert num2)) = 1)
+        | Cons -> match (num1, num2) with
+                        | (_, Nil) -> Pair (num1, Nil)
+                        | (_, _) -> Pair (num1, num2)
         | _ -> raise (MLFailure ("unknown operation"))
 ;;
 
 let rec eval (evn,e) = match e with
        | Const x1 -> Int x1
-       | Var x1 -> lookup (x1, evn)
+       | Var x1 -> 
+                       (match x1 with
+                       | "hd" -> NativeFunc "hd"
+                       | "tl" -> NativeFunc "tl"
+                       | "null" -> NativeFunc "null"
+                       | _ -> lookup (x1, evn))
        | True -> Bool true
        | False -> Bool false
+       | NilExpr -> Nil
        | Let (b, e1, e2) -> eval ((b, eval(evn,e1))::evn ,e2)
        | Letrec (b, e1, e2) -> 
                        let rename x = match x with
