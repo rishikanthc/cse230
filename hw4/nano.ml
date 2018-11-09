@@ -113,6 +113,7 @@ let listAssoc (k,l) =
 let lookup (x,evn) = 
         match x with
         | "map" -> Closure ([], None, "f", Fun ("list", Letrec ("loop", Fun ("array", If (App (Var "null", Var "array"), NilExpr, Bin (App (Var "f", App (Var "hd", Var "array")), Cons, App (Var "loop", App (Var "tl", Var "array"))))), App (Var "loop", Var "list"))))
+        | "foldl" -> Closure ([], None, "f", Fun ("base", Fun ("list", Letrec ("loop", Fun ("array", Fun ("acc", If (App (Var "null", Var "array"), Var "acc", App (App (Var "loop", App (Var "tl", Var "array")), App (App (Var "f", Var "acc"), App (Var "hd", Var "array")))))), App (App (Var "loop", Var "list"), Var "base")))))
         | _ -> let tval = listAssoc (x, evn) in
                 match tval with
                 | None -> raise (MLFailure ("unbound value: " ^ x))
