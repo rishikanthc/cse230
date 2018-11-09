@@ -369,14 +369,14 @@ ident(
 )
 "main.ml" 19 416 440 "main.ml" 19 416 449
 type(
-  (string * Nano.value) list * Nano.expr -> Nano.value
+  Nano.env * Nano.expr -> Nano.value
 )
 ident(
   int_ref Nano.eval "nano.ml" 154 3986 3994 "nano.ml" 154 3986 3998
 )
 "main.ml" 19 416 451 "main.ml" 19 416 453
 type(
-  (string * Nano.value) list
+  Nano.env
 )
 "main.ml" 19 416 455 "main.ml" 19 416 471
 type(
@@ -401,7 +401,7 @@ type(
 )
 "main.ml" 19 416 450 "main.ml" 19 416 475
 type(
-  (string * Nano.value) list * Nano.expr
+  Nano.env * Nano.expr
 )
 "main.ml" 19 416 439 "main.ml" 19 416 476
 call(
@@ -490,14 +490,14 @@ ident(
 )
 "main.ml" 24 558 579 "main.ml" 24 558 588
 type(
-  (string * Nano.value) list * Nano.expr -> Nano.value
+  Nano.env * Nano.expr -> Nano.value
 )
 ident(
   int_ref Nano.eval "nano.ml" 154 3986 3994 "nano.ml" 154 3986 3998
 )
 "main.ml" 24 558 590 "main.ml" 24 558 592
 type(
-  (string * Nano.value) list
+  Nano.env
 )
 "main.ml" 24 558 594 "main.ml" 24 558 608
 type(
@@ -522,7 +522,7 @@ type(
 )
 "main.ml" 24 558 589 "main.ml" 24 558 612
 type(
-  (string * Nano.value) list * Nano.expr
+  Nano.env * Nano.expr
 )
 "main.ml" 24 558 578 "main.ml" 24 558 613
 call(
