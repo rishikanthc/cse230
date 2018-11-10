@@ -110,6 +110,10 @@ let listAssoc (k,l) =
 
 (*********************** Your code starts here ****************************)
 
+(*lookup: string * env -> value
+ * the function searches for the variable in the environment and
+ * returns it's most recent binding
+ *)
 let lookup (x,evn) = 
         let tval = listAssoc (x, evn) in
         match tval with
@@ -125,11 +129,21 @@ let lookup (x,evn) =
 ;;
 
 
+(*convert value -> int
+ * Helper function to convert value to
+ * int
+ *)
 let convert x = match x with
 | Int a -> a
 | Bool a -> if a then 1 else 0
 ;;
 
+(*typeCheck: binop * value * value -> bool
+ * Helper function that checks if the operands 
+ * for any of the bino operators are of the 
+ * correct type. It returns true when they're
+ * correct and false otherwise
+ *)
 let typeCheck (op, x,y) = match (op, x,y) with
 | (Plus, Int _, Int _) -> true
 | (Minus, Int _, Int _) -> true
@@ -143,9 +157,13 @@ let typeCheck (op, x,y) = match (op, x,y) with
 | (Ne, Int _, Int _) -> true
 | (And, Bool _, Bool _) -> true
 | (Or, Bool _, Bool _) -> true
-| (Cons, _, _) -> true (**)
+| (Cons, _, _) -> true
 | _ -> false
 
+(* doOp: value * binop * value -> value
+ * Helper function which performs the binary operations
+ * and returns the result with the correct type
+ *)
 let doOp (num1, op, num2) = match op with
         | Plus -> Int ((+) (convert num1) (convert num2))
         | Minus -> Int ((-) (convert num1) (convert num2))
@@ -157,12 +175,18 @@ let doOp (num1, op, num2) = match op with
         | Ne -> Bool ((convert num1) != (convert num2))
         | And -> Bool (((convert num1) * (convert num2)) = 1)
         | Or -> Bool (((convert num1) + (convert num2)) = 1)
-        | Cons -> match (num1, num2) with
+        | Cons -> (match (num1, num2) with
                         | (_, Nil) -> Pair (num1, Nil)
                         | (_, Pair (a,b)) -> Pair (num1, num2)
+                        | _ -> raise (MLFailure ("Incorrect arguments")))
         | _ -> raise (MLFailure ("unknown operation"))
 ;;
-(**)
+
+(* eval: env * expr -> value
+ * This function evaluates the expression according to which type of expression they are
+ * This is the main part of the program which interprets the various primitives of the 
+ * nanoml language and appropriately executes their corresponding commands and applies functions.
+ *)
 let rec eval (evn,e) = match e with
        | Const x1 -> Int x1
        | Var x1 -> lookup (x1, evn)
