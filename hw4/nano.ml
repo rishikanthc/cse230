@@ -111,13 +111,17 @@ let listAssoc (k,l) =
 (*********************** Your code starts here ****************************)
 
 let lookup (x,evn) = 
-        match x with
-        | "map" -> Closure ([], None, "f", Fun ("list", Letrec ("loop", Fun ("array", If (App (Var "null", Var "array"), NilExpr, Bin (App (Var "f", App (Var "hd", Var "array")), Cons, App (Var "loop", App (Var "tl", Var "array"))))), App (Var "loop", Var "list"))))
-        | "foldl" -> Closure ([], None, "f", Fun ("base", Fun ("list", Letrec ("loop", Fun ("array", Fun ("acc", If (App (Var "null", Var "array"), Var "acc", App (App (Var "loop", App (Var "tl", Var "array")), App (App (Var "f", Var "acc"), App (Var "hd", Var "array")))))), App (App (Var "loop", Var "list"), Var "base")))))
-        | _ -> let tval = listAssoc (x, evn) in
-                match tval with
-                | None -> raise (MLFailure ("unbound value: " ^ x))
-                | Some a -> a
+        let tval = listAssoc (x, evn) in
+        match tval with
+        | None ->
+                        (match x with
+                        | "map" -> Closure ([], None, "f", Fun ("list", Letrec ("loop", Fun ("array", If (App (Var "null", Var "array"), NilExpr, Bin (App (Var "f", App (Var "hd", Var "array")), Cons, App (Var "loop", App (Var "tl", Var "array"))))), App (Var "loop", Var "list"))))
+                        | "foldl" -> Closure ([], None, "f", Fun ("base", Fun ("list", Letrec ("loop", Fun ("array", Fun ("acc", If (App (Var "null", Var "array"), Var "acc", App (App (Var "loop", App (Var "tl", Var "array")), App (App (Var "f", Var "acc"), App (Var "hd", Var "array")))))), App (App (Var "loop", Var "list"), Var "base")))))
+                        | "hd" -> NativeFunc "hd"
+                        | "tl" -> NativeFunc "tl"
+                        | "null" -> NativeFunc "null"
+                        | _ -> raise (MLFailure ("unbound value: " ^ x)))
+        | Some a -> a
 ;;
 
 
@@ -158,15 +162,10 @@ let doOp (num1, op, num2) = match op with
                         | (_, Pair (a,b)) -> Pair (num1, num2)
         | _ -> raise (MLFailure ("unknown operation"))
 ;;
-
+(**)
 let rec eval (evn,e) = match e with
        | Const x1 -> Int x1
-       | Var x1 -> 
-                       (match x1 with
-                       | "hd" -> NativeFunc "hd"
-                       | "tl" -> NativeFunc "tl"
-                       | "null" -> NativeFunc "null"
-                       | _ -> lookup (x1, evn))
+       | Var x1 -> lookup (x1, evn)
        | True -> Bool true
        | False -> Bool false
        | NilExpr -> Nil
@@ -199,7 +198,8 @@ let rec eval (evn,e) = match e with
                                (match name with
                                | None -> eval ((arg, eval (evn, e2))::fenv, body)
                                | Some f -> eval ((f, func)::(arg, eval (evn, e2))::fenv, body))
-                       | _ -> raise (MLFailure ("E1 should evaluate to a function")))
+                               | _ -> raise (MLFailure ("This expression was expected to be a closure" ))
+                       )
        | If (p, t, f) -> if eval (evn, p) = Bool true then eval (evn, t)
                          else eval (evn, f)
        | Bin (e1, op, e2) -> 
@@ -207,7 +207,6 @@ let rec eval (evn,e) = match e with
                        let n2 = eval (evn,e2) in
                        if typeCheck (op, n1, n2) then (doOp (n1, op, n2))
                        else raise (MLFailure ("type error"))
-       | _ -> raise (MLFailure ("Unknown expression"))
 ;;
 
 (**********************     Testing Code  ******************************)
