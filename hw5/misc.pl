@@ -93,13 +93,13 @@ findcost([],0).
 findcost([H|T],C) :- findcost(T,Ct), cost(H,Price), C is Ct + Price.
 total_cost(X,K) :- ingredients(X, R), findcost(R,P), P=K. 
 
-has_ingredients(X,L) :- ingredients(X,Ing), intersection(Ing,L,L).
+has_ingredients(X,L) :- ingredients(X,Ing), reverse(Ing, Revl), intersection(L,Revl,L).
 
 avoids_ingredients(X,L) :- ingredients(X,Ing), intersection(Ing, L, []). 
 
-p1(L,X) :- throw(to_be_done). 
+p1(L,X) :- setof(A,has_ingredients(A, X), L). 
 
-p2(L,Y) :- throw(to_be_done). 
+p2(L,Y) :- setof(A, avoids_ingredients(A, Y), L). 
 
 find_items(L,X,Y) :- p1(L1,X),p2(L2,Y),intersection(L1,L2,L).  
 
