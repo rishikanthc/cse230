@@ -15,4 +15,11 @@ class Vector(object):
     
     def __repr__(self):
         return "Vector(" + str(self.vec) + ")"
+    
+    def __len__(self):
+        return len(self.vec)
+
+    def __iter__(self):
+        for x in self.vec:
+            yield x
         
