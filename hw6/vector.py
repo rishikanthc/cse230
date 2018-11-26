@@ -34,6 +34,9 @@ class Vector(object):
             raise TypeError("invalid type")
         return Vector(new_vec)
 
+    def __radd__(self, other):
+        return self.__add__(other)
+
     def __iadd__(self, other):
         if issubclass(type(other), Vector):
             self.vec = [x+y for x,y in zip(self.vec, other.vec)]
@@ -90,3 +93,68 @@ class Vector(object):
                 raise ValueError("length cannot be modified")
         else:
             raise TypeError("Index should be an integer")
+
+    def __eq__(self, other):
+        if issubclass(type(other), Vector):
+            cmpr = [x == y for x,y in zip(self.vec, other.vec)]
+            if sum(cmpr) == len(self.vec):
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def __ne__(self, other):
+        if issubclass(type(other), Vector):
+            cmpr = [x == y for x,y in zip(self.vec, other.vec)]
+            if sum(cmpr) != len(self.vec):
+                return True
+            else:
+                return False
+        else:
+            return True
+
+    def __lt__(self, other):
+        self_vec = sorted(self.vec, reverse = True)
+        other_vec = sorted(other.vec, reverse = True)
+
+        for x,y in zip(self_vec, other_vec):
+            if x == y:
+                continue
+            return x < y
+
+        return False
+
+    def __gt__(self, other):
+        self_vec = sorted(self.vec, reverse = True)
+        other_vec = sorted(other.vec, reverse = True)
+
+        for x,y in zip(self_vec, other_vec):
+            if x == y:
+                continue
+            return x > y
+
+        return False
+    
+    def __le__(self, other):
+        self_vec = sorted(self.vec, reverse = True)
+        other_vec = sorted(other.vec, reverse = True)
+
+        for x,y in zip(self_vec, other_vec):
+            if x == y:
+                continue
+            return x < y
+
+        return True
+
+    def __ge__(self, other):
+        self_vec = sorted(self.vec, reverse = True)
+        other_vec = sorted(other.vec, reverse = True)
+
+        for x,y in zip(self_vec, other_vec):
+            if x == y:
+                continue
+            return x > y
+
+        return True
+
