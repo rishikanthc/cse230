@@ -70,14 +70,23 @@ class Vector(object):
                 return self.vec[idx]
             else:
                 raise IndexError("Index out of range")
+        elif issubclass(type(idx), slice):
+            return self.vec[idx.start : idx.stop : idx.step]
         else:
             raise TypeError("Index should be an integer")
 
     def __setitem__(self, idx, value):
-        if issubclass(type(idx), int):
+        typeval = type(idx)
+        vecLen = len(self.vec)
+
+        if issubclass(typeval, int):
             if idx < len(self.vec):
                 self.vec[idx] = value
             else:
                 raise IndexError("Index out of range")
+        elif issubclass(typeval, slice):
+            self.vec[idx.start : idx.stop : idx.step] = value
+            if vecLen != len(self.vec):
+                raise ValueError("length cannot be modified")
         else:
             raise TypeError("Index should be an integer")
