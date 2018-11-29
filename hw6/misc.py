@@ -59,9 +59,3 @@ def word_count(fn):
                     wordCount[word] = 1
 
     return wordCount
-
-if __name__ == '__main__':
-    ret = word_count("news.txt")
-    print (ret)
-    print (len(ret))
-    print (ret["edu"])
