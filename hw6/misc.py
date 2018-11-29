@@ -16,11 +16,13 @@ class Failure(Exception):
 def closest_to(l,v):
     """Return the element of the list l closest in value to v.  In the case of
        a tie, the first such element is returned.  If l is empty, None is returned."""
-    min_diff = v
-    closest = 0
+    min_diff = float('inf')
+    
 
     if l == []:
         return None
+
+    closest = l[0]
 
     for val in l:
         diff = abs(val - v)

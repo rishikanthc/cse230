@@ -127,7 +127,7 @@ class Vector(object):
             else:
                 raise IndexError("Index out of range")
         elif issubclass(type(idx), slice):
-            return self.vec[idx.start : idx.stop : idx.step]
+            return Vector(self.vec[idx.start : idx.stop : idx.step])
         else:
             raise TypeError("Index should be an integer")
 
