@@ -18,6 +18,8 @@ class Vector(object):
             self.vec = list(x)
         elif issubclass(type(x), str):
             self.vec = list(x)
+        elif isinstance(x, range): # New addition to account for python3 handling of range
+            self.vec = list(x)
         else:
             raise TypeError("Invalid type")
 
@@ -141,6 +143,10 @@ class Vector(object):
         '''
         typeval = type(idx)
         vecLen = len(self.vec)
+        
+        # New addition to account for python3 handling of range
+        if isinstance(value, range):
+            value = list(value)
 
         if issubclass(typeval, int):
             if idx < len(self.vec):
