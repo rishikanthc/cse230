@@ -155,7 +155,7 @@ class Type(Prologable):
         elif isinstance(self, ListTy):
             return 'list(' + self.inner.toProlog() + ')'
         elif isinstance(self, VarTy):
-            return 'var ' + self.name + ')'
+            return self.name
 
 class IntTy(Type):
     def __init__(self):
