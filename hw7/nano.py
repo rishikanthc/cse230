@@ -27,7 +27,7 @@ class Expression(Prologable):
         elif isinstance(self, Const):
             return 'const(' + str(self.v) + ')'
         elif isinstance(self, Bool):
-            return 'boolean(' + str(self.v).toLower() + ')'
+            return 'boolean(' + str(self.v) + ')'
         elif isinstance(self, NilExpr):
             return 'nil'
         elif isinstance(self, If):
@@ -154,7 +154,7 @@ class Type(Prologable):
             return 'arrow(' + self.l.toProlog() +', ' + self.r.toProlog() + ')'
         elif isinstance(self, ListTy):
             return 'list(' + self.inner.toProlog() + ')'
-        elif isisntance(self, VarTy):
+        elif isinstance(self, VarTy):
             return 'var ' + self.name + ')'
 
 class IntTy(Type):
