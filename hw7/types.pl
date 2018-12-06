@@ -1,4 +1,6 @@
-envtype(Bindings,Var,Ty) :- fail.
+envh([[X,A]|_],X,A).
+envh([_|T],X,A) :- envh(T,X,A).
+envtype(Env,Var,Ty) :- envh(Env,Var,A),!,A=Ty.
 
 int_op(plus).
 int_op(minus).
