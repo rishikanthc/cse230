@@ -27,7 +27,7 @@ class Expression(Prologable):
         elif isinstance(self, Const):
             return 'const(' + str(self.v) + ')'
         elif isinstance(self, Bool):
-            return 'boolean(' + str(self.b) + ')'
+            return 'boolean(' + str(self.v).toLower() + ')'
         elif isinstance(self, NilExpr):
             return 'nil'
         elif isinstance(self, If):
