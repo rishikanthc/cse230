@@ -191,4 +191,3 @@ def change_mt(l,a):
         except ChangeException:
             return change_mt(l[1:],a)
 
-run_examples()
