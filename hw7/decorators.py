@@ -38,7 +38,30 @@ class traced(object):
 class memoized(object):
     def __init__(self,f):
         # replace this and fill in the rest of the class
-        self.__name__="NOT_IMPLEMENTED"
+        self.__name__= f.__name__
+        self.func = f
+        self.prevRuns = {}
+
+    def __call__(self, *args, **kargs):
+        if args:
+            argval = args
+        if kargs:
+            argval = tuple(list(kargs.values()))
+
+        try:
+            rv = self.prevRuns[argval]
+        except:
+            try:
+                rv = self.func(*args, **kargs)
+            except Exception as e:
+                rv = e
+            else:
+                self.prevRuns[argval] = rv
+        
+        if isinstance(rv, Exception):
+            raise rv
+        else:
+            return rv
 
 # run some examples.  The output from this is in decorators.out
 def run_examples():
