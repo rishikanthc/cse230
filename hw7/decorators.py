@@ -17,7 +17,23 @@ class profiled(object):
 class traced(object):
     def __init__(self,f):
         # replace this and fill in the rest of the class
-        self.__name__="NOT_IMPLEMENTED"
+        self.__name__ = f.__name__
+        self.func = f
+        self.count = 0
+
+    def __call__(self, *args, **kargs):
+        printstr = "| " * self.count
+        self.count = self.count + 1
+        if args:
+            argval = ", ".join([str(val) for val in args])
+        if kargs:
+            argval = ", ".join([key + "=" + str(val) for key,val in kargs.items()])
+        print(printstr + ",- " + self.__name__ + "(" + argval  + ")")
+        rv = self.func(*args, **kargs)
+        print(printstr + "`- " + str(rv))
+        self.count = self.count - 1
+
+        return rv
 
 class memoized(object):
     def __init__(self,f):
