@@ -45,23 +45,26 @@ class memoized(object):
         # replace this and fill in the rest of the class
         self.__name__= f.__name__
         self.func = f
-        self.prevRuns = {}
+        self.prevRuns = []
 
     def __call__(self, *args, **kargs):
         if args:
-            argval = tuple(args)
+            argval = args
         if kargs:
             argval = tuple(kargs.values())
 
-        if argval in self.prevRuns:
-            rv = self.prevRuns[argval]
-        else:
+        
+        rv = None
+        for val in self.prevRuns:
+            if argval == val[0]:
+                rv = val[1]
+        
+        if rv == None:
             try:
                 rv = self.func(*args, **kargs)
             except Exception as e:
                 rv = e
-            else:
-                self.prevRuns[argval] = rv
+            self.prevRuns.append((argval, rv))
         
         if isinstance(rv, Exception):
             raise rv
@@ -188,3 +191,4 @@ def change_mt(l,a):
         except ChangeException:
             return change_mt(l[1:],a)
 
+run_examples()
