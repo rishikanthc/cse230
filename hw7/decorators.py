@@ -15,24 +15,29 @@ class profiled(object):
         self.__count=0
 
 class traced(object):
+    count = 0
     def __init__(self,f):
         # replace this and fill in the rest of the class
         self.__name__ = f.__name__
         self.func = f
-        self.count = 0
 
     def __call__(self, *args, **kargs):
-        printstr = "| " * self.count
-        self.count = self.count + 1
+        printstr = "| " * traced.count
+        traced.count = traced.count + 1
         if args:
             argval = ", ".join([str(val) for val in args])
         if kargs:
             argval = ", ".join([key + "=" + str(val) for key,val in kargs.items()])
         print(printstr + ",- " + self.__name__ + "(" + argval  + ")")
-        rv = self.func(*args, **kargs)
+        try:
+            rv = self.func(*args, **kargs)
+        except Exception as e:
+            rv = e
+            traced.count = traced.count - 1
+            raise rv
+        
+        traced.count = traced.count - 1
         print(printstr + "`- " + str(rv))
-        self.count = self.count - 1
-
         return rv
 
 class memoized(object):
@@ -44,13 +49,13 @@ class memoized(object):
 
     def __call__(self, *args, **kargs):
         if args:
-            argval = args
+            argval = tuple(args)
         if kargs:
-            argval = tuple(list(kargs.values()))
+            argval = tuple(kargs.values())
 
-        try:
+        if argval in self.prevRuns:
             rv = self.prevRuns[argval]
-        except:
+        else:
             try:
                 rv = self.func(*args, **kargs)
             except Exception as e:
@@ -182,5 +187,4 @@ def change_mt(l,a):
             return [l[0]]+change_mt(l,a-l[0])
         except ChangeException:
             return change_mt(l[1:],a)
-
 
