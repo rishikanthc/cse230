@@ -1,6 +1,6 @@
-envh([[X,A]|_],X,A).
-envh([_|T],X,A) :- envh(T,X,A).
-envtype(Env,Var,Ty) :- envh(Env,Var,A),!,A=Ty.
+firstInst([[X,A]|_],X,A).
+firstInst([_|T],X,A) :- firstInst(T,X,A).
+envtype(Env,Var,Ty) :- firstInst(Env,Var,A),!,A=Ty.
 
 int_op(plus).
 int_op(minus).

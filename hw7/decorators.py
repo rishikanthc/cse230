@@ -15,13 +15,36 @@ class profiled(object):
         self.__count=0
 
 class traced(object):
+    '''
+    This is the implementation of the traced decorator, which prints the function, its
+    arguments and it's return value in a specific pattern. Eg.
+    ,- foo(4, 5)
+    | ,- foo(b=3, a=4)
+    | | ,- foo(b=3, a=2)
+    | | | ,- foo(b=1, a=2)
+    | | | | ,- foo(b=1, a=0)
+    | | | | `- 1
+    | | | `- 1
+    | | `- 1
+    | `- 1
+    `- 1
+    1
+    '''
     count = 0
     def __init__(self,f):
+        '''Constructor which takes as argument the function to be traced and initializes
+        its internal func variable with this function
+        '''
         # replace this and fill in the rest of the class
         self.__name__ = f.__name__
         self.func = f
 
     def __call__(self, *args, **kargs):
+        '''
+        The call method which is responsible for calling the original function stored in
+        internal variable func. It also processes the pattern to be printed before and
+        after running the original function.
+        '''
         printstr = "| " * traced.count
         traced.count = traced.count + 1
         if args:
@@ -41,13 +64,31 @@ class traced(object):
         return rv
 
 class memoized(object):
+    '''
+    Implementation of the memoized decorator, which takes a function and stores its
+    previous runs arguments and result so that it if it's run again, it can immediately
+    return the result without re running the function.
+    '''
     def __init__(self,f):
+        '''
+        Constructor which takes as argument the original function and stores it in its
+        internal variable func. It also initializes a list prevRuns for the entire class, 
+        which is used for storing past runs of the function
+        '''
         # replace this and fill in the rest of the class
         self.__name__= f.__name__
         self.func = f
         self.prevRuns = []
 
     def __call__(self, *args, **kargs):
+        '''
+        The call method which executes the actual function(stored in internal variable
+        func) and this method also stores the arguments and the return value of the 
+        function in it's internal list variable prevRuns. On subsequent calls, it checks
+        if the function has been run with the same arguments before and if it has,
+        it returns the stored value, without re running the function. If not, it runs
+        the function and stores its results along with its arguments in prevRuns.
+        '''
         if args:
             argval = args
         if kargs:
